@@ -2,6 +2,7 @@ import numpy as np
 import scipy as sp
 import matplotlib as mp
 import matplotlib.pyplot as plt
+from sympy import Symbol, integrate
 
 class whisker:
     def __init__(self, arc_length: float, medulla_arc_length: float, youngs_modulus: float, base_d: float, tip_d: float, medulla_base_d: float, A: float, B: float):
@@ -34,19 +35,48 @@ class whisker:
     def cartesian(self):
         pass
 
-    def graph(self, samples):
-        s = np.linspace(0,self.arc_length, samples)
-        x = (np.cos(0.5 * s * (2*self.B + self.A*s)))
-        y = np.sin(0.5 * s * (2*self.B + self.A*s))
+    def __x(self, s):
+        return np.cos(self.curvature(s))
+        
+
+    def __y(self, s):
+        return np.sin(self.curvature(s))
+
+    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0):
+        s = 0
+        phi = 0
+        x=[0]
+        y=[0]
+        step = self.arc_length/samples
+        for i in range(1,samples+1):
+            s += step
+            phi += self.curvature(s)*step + step *(((self.arc_length - s) * tip_force_magnitude)/(self.youngs_modulus*self.moment_of_inertia_WRONG(s)))
+            x.append(x[i-1]+np.cos(phi)*step)
+            y.append(y[i-1]+np.sin(phi)*step)
+        
+
+        
+        """x = -np.cos(self.curvature(s)) +1
+        y = np.sin(self.curvature(s))
+
+        print(x)
+        
         if self.A==self.B and self.B==0:
             x=np.linspace(0,0, samples)
-            y=s
+            y=s"""
 
-        ax = plt.figure().add_subplot()
-        ax.plot(x, y, label = "Whisker")
+        """ax = plt.figure().add_subplot()
+        ax.plot(y, x, label = "Whisker")
         ax.legend()
+        plt.plot(ax)
+        plt.show()"""
+        plt.plot(y,x,label="Whisker")
         plt.show()
-    
+        
+        
+    def display(self):
+        pass
+
     def curvature(self, s):
         return self.A*s + self.B
 
