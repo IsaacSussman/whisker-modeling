@@ -50,7 +50,7 @@ class whisker:
         step = self.arc_length/samples
         for i in range(1,samples+1):
             s += step
-            phi += self.curvature(s)*step + step *(((self.arc_length - s) * tip_force_magnitude)/(self.youngs_modulus*self.moment_of_inertia_WRONG(s)))
+            phi += self.curvature(s)*step + (step *(((self.arc_length - s) * tip_force_magnitude)/(self.youngs_modulus*self.moment_of_inertia_WRONG(s)))) * ((-tip_force_direction+90)/90)
             x.append(x[i-1]+np.cos(phi)*step)
             y.append(y[i-1]+np.sin(phi)*step)
         
