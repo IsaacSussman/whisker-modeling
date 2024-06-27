@@ -70,12 +70,14 @@ class whisker:
         ax.legend()
         plt.plot(ax)
         plt.show()"""
+        plt.xlim(-self.arc_length, self.arc_length)
+        plt.ylim(0, self.arc_length)
         plt.plot(y,x,label="Whisker")
-        plt.show()
+        
         
         
     def display(self):
-        pass
+        plt.show()
 
     def curvature(self, s):
         return self.A*s + self.B
