@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sympy import Symbol, integrate
 
 class whisker:
+    counter = 0
     def __init__(self, arc_length: float, medulla_arc_length: float, youngs_modulus: float, base_d: float, tip_d: float, medulla_base_d: float, A: float, B: float):
         self.arc_length = arc_length
         self.medulla_arc_length = medulla_arc_length
@@ -29,6 +30,8 @@ class whisker:
     def moment_of_inertia_WRONG(self, s):
         # This does not account for the different conicity of the medulla
         # Strictly copied from the thesis
+        if (s > self.medulla_arc_length):
+            return (np.pi * self.diameter_by_conicity(s) ** 4)/64
         return self.base_I * (1-((1-self.conicity)/self.arc_length))
     
 
@@ -42,7 +45,7 @@ class whisker:
     def __y(self, s):
         return np.sin(self.curvature(s))
 
-    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0):
+    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0, highlight = False):
         s = 0
         phi = 0
         x=[0]
@@ -53,9 +56,6 @@ class whisker:
             phi += self.curvature(s)*step + (step *(((self.arc_length - s) * tip_force_magnitude)/(self.youngs_modulus*self.moment_of_inertia_WRONG(s)))) * ((-tip_force_direction+90)/90)
             x.append(x[i-1]+np.cos(phi)*step)
             y.append(y[i-1]+np.sin(phi)*step)
-        
-
-        
         """x = -np.cos(self.curvature(s)) +1
         y = np.sin(self.curvature(s))
 
@@ -64,7 +64,6 @@ class whisker:
         if self.A==self.B and self.B==0:
             x=np.linspace(0,0, samples)
             y=s"""
-
         """ax = plt.figure().add_subplot()
         ax.plot(y, x, label = "Whisker")
         ax.legend()
@@ -72,7 +71,7 @@ class whisker:
         plt.show()"""
         plt.xlim(-self.arc_length, self.arc_length)
         plt.ylim(0, self.arc_length)
-        plt.plot(y,x,label="Whisker")
+        plt.plot(y,x,label="Whisker "+str(whisker.counter))
         
         
         
