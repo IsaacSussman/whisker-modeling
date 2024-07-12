@@ -31,7 +31,7 @@ class whisker:
         # This does not account for the different conicity of the medulla
         # Strictly copied from the thesis
         if (s > self.medulla_arc_length):
-            return (np.pi * self.diameter_by_conicity(s) ** 4)/64
+            return ((np.pi *self.base_d ** 4)/64) * (1-((1-self.conicity)/self.arc_length))
         return self.base_I * (1-((1-self.conicity)/self.arc_length))
     
 

@@ -9,8 +9,8 @@ import whisker
 def main():
     CSV_FILENAME = "Unified BS.csv"
     w = whisker.whisker(55.097, 44.097, 4, 55/20.0, 0.1, 55.0/40, 0.00093152, -0.005938)
-    for i in range(1,56,1):
-        w.medulla_arc_length = i
+    for i in range(0,int((55/20.0)*100+5),5):
+        w.medulla_base_d = i/100
         w.graph(1000, tip_force_magnitude=0.001)
     w.display()
     
