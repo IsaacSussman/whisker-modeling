@@ -5,8 +5,9 @@ from typing import Final
 
 
 def main():
+    # The CSV File the code accesses
     CSV_FILENAME: Final[str] = "HartmanLuoCatData.csv"
-
+    
     w = whisker.whisker(55.097, 44.097, 4, 55/20.0, 0.1, 55.0/40, 0.00093152, -0.005938)
     coefficients = w.graph()
     w.graph(1000, 0.01)
