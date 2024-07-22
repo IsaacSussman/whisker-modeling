@@ -14,7 +14,7 @@ def main():
     w = whisker.whisker(55.097, 44.097, 4, 55/20.0, 0.1, 55.0/40, 0.00093152, -0.005938)
     # coefficients = w.old_graph(100)
     coefficients = w.old_graph(100, 0.01)
-    coefficients_2 = w.graph(100, 0.01)
+    coefficients_2 = w.graph(100, 0.01, 1)
     print(np.sqrt((coefficients[1]-coefficients_2[1])**2+(coefficients[2]-coefficients_2[2])**2))
     w.display()
     print(str(coefficients[0][0])+"x^3 + " + str(coefficients[0][1])+"x^2 + " + str(coefficients[0][2]) +"x + " + str(coefficients[0][3]))
