@@ -4,8 +4,7 @@ import matplotlib.pyplot as plt
 class whisker:
     counter = 0
 
-
-    def __init__(self, arc_length: float, medulla_arc_length: float, youngs_modulus: float, base_d: float, tip_d: float, medulla_base_d: float, A: float, B: float):
+    def __init__(self, arc_length: float, medulla_arc_length: float, youngs_modulus: float, base_d: float, tip_d: float, medulla_base_d: float, A: float, B: float) -> None:
         """Initializes with the inputted variables.
 
         Args:
@@ -43,7 +42,7 @@ class whisker:
         self.A = A
         self.B = B
     
-    def setValues(self, arc_length: float = None, medulla_arc_length: float = None, youngs_modulus: float = None, base_d: float = None, tip_d: float = None, medulla_base_d: float = None, A: float = None, B: float = None):  
+    def setValues(self, arc_length: float = None, medulla_arc_length: float = None, youngs_modulus: float = None, base_d: float = None, tip_d: float = None, medulla_base_d: float = None, A: float = None, B: float = None) -> None:  
         
         """Sets instance variables with the inputted parameters. If a parameter is None, leaves it unchanged.
 
@@ -82,7 +81,7 @@ class whisker:
         self.A = A if A else self.A
         self.B = B if B else self.B
 
-    def diameter(self, s):
+    def diameter(self, s) -> float:
         """returns the diameter d at a distance s along the curve
 
         Args:
@@ -93,7 +92,7 @@ class whisker:
         """
         return self.base_d*(1-((1 - self.conicity)/self.arc_length)*s)
     
-    def moment_of_inertia(self, s: float):
+    def moment_of_inertia(self, s: float) -> float:
         """returns the moment of inertia I at a distance s along the curve
 
         Args:
@@ -115,7 +114,7 @@ class whisker:
     def __y(self, s):
         return np.sin(self.curvature(s))
 
-    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0):
+    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0) -> tuple[np.ndarray[np.float64], tuple[float, float]]:
         """plots a curve at the specified sample resolution with the specified force applied at the tip
 
         Args:
@@ -125,6 +124,7 @@ class whisker:
 
         Returns:
             NDarray of float64: returns the 3rd degree polyfit of the curve. SEE ALSO: https://numpy.org/doc/stable/reference/generated/numpy.polyfit.html
+            tuple of float: returns the (x, y) position of the tip of the whisker
         """        
         s = 0
         phi = 0
@@ -139,15 +139,15 @@ class whisker:
         plt.xlim(-self.arc_length, self.arc_length)
         plt.ylim(0, self.arc_length)
         plt.plot(y,x,label="Whisker "+str(whisker.counter))
-        return np.polyfit(x,y,3)
+        return np.polyfit(x,y,3), (x[-1], y[-1])
         
         
         
-    def display(self):
+    def display(self) -> None:
         "runs matplotlib.pyplot.show(). displays all graphed curves."
         plt.show()
 
-    def curvature(self, s: float):
+    def curvature(self, s: float) -> float:
         """returns the curvature κ at a distance s along the curve
 
         Args:
