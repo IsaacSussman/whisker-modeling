@@ -114,7 +114,7 @@ class whisker:
     def __y(self, s):
         return np.sin(self.curvature(s))
 
-    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0) -> tuple[np.ndarray[np.float64], tuple[float, float]]:
+    def graph(self, samples=100,tip_force_magnitude=0,tip_force_direction=0, highlight = False) -> tuple[np.ndarray[np.float64], tuple[float, float]]:
         """plots a curve at the specified sample resolution with the specified force applied at the tip
 
         Args:
@@ -138,7 +138,12 @@ class whisker:
             y.append(y[i-1]+np.sin(phi)*step)
         plt.xlim(-self.arc_length, self.arc_length)
         plt.ylim(0, self.arc_length)
-        plt.plot(y,x,label="Whisker "+str(whisker.counter))
+        plt.xlabel("x-position (mm)")
+        plt.ylabel("y-position (mm)")
+        if not highlight:
+            plt.plot(y,x,label="Whisker "+str(whisker.counter))
+        else:
+            plt.plot(y,x, 'k--',label="Whisker "+str(whisker.counter))
         return np.polyfit(x,y,3), (x[-1], y[-1])
         
         

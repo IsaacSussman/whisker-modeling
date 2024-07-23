@@ -8,15 +8,19 @@ def main():
     # The CSV File the code accesses
     CSV_FILENAME: Final[str] = "HartmanLuoCatData.csv"
     
-    w = whisker.whisker(55.097, 44.097, 4, 55/20.0, 0.1, 55.0/40, 0.00093152, -0.005938)
+    w = whisker.whisker(55.097, 44.097, 4, 0.12, 0.01, 55.0/40, 0.00093152, -0.005938)
     coefficients = w.graph()
-    w.graph(1000, 0.01)
+    w.graph(1000, 0.0001)
     w.display()
-    print(str(coefficients[0])+"x^3 + " + str(coefficients[1])+"x^2 + " + str(coefficients[2]) +"x + " + str(coefficients[3]))
+    print(str(coefficients[0][0])+"x^3 + " + str(coefficients[0][1])+"x^2 + " + str(coefficients[0][2]) +"x + " + str(coefficients[0][3]))
     
-    for i in range(1,50,1):
-        w.setValues(youngs_modulus=i)
-        w.graph(1000, tip_force_magnitude=0.001)
+    w.graph()
+    for i in range(1,20,1):
+        w.setValues(base_d=i/10)
+        if i == 2 or i == 23:
+            w.graph(1000, tip_force_magnitude=0.0001, highlight=True)
+        else:
+            w.graph(1000, tip_force_magnitude=0.0001)
     w.display()
     
     whisker_data = []
