@@ -17,6 +17,9 @@ Yifu Luo. (2022). SeNSE-lab/Luo_and_Hartmann_PLoSOne2022_dataFiles: Revised vers
 
 Project mentored by [Dr. Donna Ebenstein](https://www.bucknell.edu/fac-staff/donna-ebenstein) at Bucknell University
 
-Presented at the 2024 Susquehanna Valley Undergraduate Research Symposium @ Bucknell. Thanks to them for the oppurtunity.
+Presented at the 2024 Susquehanna Valley Undergraduate Research Symposium @ Bucknell. Thanks to them for the opportunity. A PDF version of the poster is included in the repository, click on the pdf version below to view it.
 
-Parrallel research and COMSOL modeling done by Zachary Ebilane and Somtochi Ojiaku
+Parallel research and COMSOL modeling done by Zachary Ebilane and Somtochi Ojiaku
+
+[<img src="SVURS poster.png">](https://github.com/IsaacSussman/whisker-modeling/blob/fe3a09dcce160dff5159f552fd54bc136eb185d1/SVURS%20Poster.pdf)
+_Click to view pdf version_
